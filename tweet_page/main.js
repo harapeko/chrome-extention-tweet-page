@@ -1,8 +1,24 @@
 var share_text = ''
 
+// add contextMenus
+chrome.runtime.onInstalled.addListener(function () {
+  chrome.contextMenus.create({
+    id: 'share',
+    type : 'normal',
+    title : 'tweet current page',
+    contexts: ['page'],
+  });
+});
+
+// browserAction clicked
 chrome.browserAction.onClicked.addListener(function(tab) {
   ShareTweet(tab)
 })
+
+// contextMenus clicked
+chrome.contextMenus.onClicked.addListener(function (info, tab) {
+  ShareTweet(tab)
+});
 
 // share tweet popup
 //
