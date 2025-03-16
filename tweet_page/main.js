@@ -2,14 +2,14 @@
 chrome.runtime.onInstalled.addListener(function () {
   chrome.contextMenus.create({
     id: 'share',
-    type : 'normal',
-    title : 'tweet current page',
+    type: 'normal',
+    title: 'tweet current page',
     contexts: ['page'],
   });
 });
 
 // browserAction clicked
-chrome.browserAction.onClicked.addListener(function(tab) {
+chrome.action.onClicked.addListener(function(tab) {
   ShareTweet(tab)
 })
 
@@ -22,9 +22,9 @@ chrome.contextMenus.onClicked.addListener(function (info, tab) {
 //
 // Object tab
 function ShareTweet(tab) {
-  var share_text = encodeURIComponent(tab.title)
+  let share_text = encodeURIComponent(tab.title)
 
-  var get_sync_storage = getSyncStorage()
+  const get_sync_storage = getSyncStorage()
   get_sync_storage.then(function (items) {
     if (items.prefixAvailable) {
       share_text = items.prefixText + share_text
